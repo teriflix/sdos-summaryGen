@@ -1,16 +1,3 @@
-# import ollama
-# desiredModel="llama3.2:3b"
-# questionToAsk="Hello bhai"
-# response=ollama.chat(model=desiredModel, messages=[{
-#     'role':'user',
-#     'content':questionToAsk,
-
-# }])
-
-
-# ollamaResponse=response['message']['content']
-# print(ollamaResponse)
-
 from transformers import pipeline
 import torch
 from screenplay_tools.fountain.parser import Parser
@@ -19,9 +6,12 @@ import re
 with open("/Users/teo/Desktop/Big-Fish.fountain.txt") as file:
     script=file.read()
 
+#Parsing the script using screenplay fountain parser
 fp= Parser()
 fp.add_text(script)
 text=fp.script.dump()
+
+#Converting json elements into machine understandable tokens
 p1=r'ACTION:"([\S\s]*?)"'
 r1=r'(ACTION) \1'
 
@@ -38,6 +28,7 @@ text=re.sub(p2,r2,text)
 text=re.sub(p3,r3,text)
 text=re.sub(p4,r4,text)
 
+#Splitting the scenes as the model can not understand very big contexts
 inds=[]
 to_find="### Scene: "
 for i in range(len(text)):
@@ -91,7 +82,7 @@ The user will provide text that has been converted into a readable script format
    - Note: "(V.O.)" means Narration. Treat this as the storyteller speaking to the audience, distinct from the physical scene.
 
 ### WRITING RULES
-- Write a single, cohesive paragraph in the PRESENT TENSE.
+- Write a single, cohesive paragraph in the present.
 - Focus on the conflict: What does the protagonist want? What stands in their way?
 - Differentiate between the "Story being told" (Edward's tall tales) and the "Reality" (Will watching him tell it).
 - Do not use bullet points or list formatting.'''
@@ -102,37 +93,46 @@ The user will provide text that has been converted into a readable script format
             }
 ]
 
-outputs = pipe(
-    messages,
-    max_new_tokens=2000,
-    do_sample=False,
-    temperature=None, 
-    top_p=None
-)
-print(outputs[0]["generated_text"][-1]["content"])
 
-# prev_summary=""
-# summaries=[]
+prev_summary=""
+summaries=[]
+i=0
 
-# for i in range(len(scenes)):
-#     this_scene=""
-#     # if (i!=0):
-#     #     this_scene=f"PREVIOUSLY IN THE STORY: {prev_summary}\n\n CURRENT SCENE TEXT: {scenes[i]}"
-#     # else:
-#     this_scene=f"{scenes[i]}"
-#     messages[1]={
-#             "role": "user", 
-#             "content": f'''Here is the script segment to summarize:\n{this_scene}\nWrite the narrative summary now.'''
-#             }
-#     outputs = pipe(
-#         messages,
-#         max_new_tokens=2000,
-#         do_sample=False,
-#         temperature=None, 
-#         top_p=None
-#     )
-#     # print(this_scene)
-#     prev_summary=outputs[0]["generated_text"][-1]["content"]
-#     # summaries.append(prev_summary)
-#     print(prev_summary)
+#Grouping scenes such that their total characters is <2500 and putting summaries in summaries[]
+while (i<len(scenes)):
+ 
+    # if (i!=0):
+    #     curr=""
+    #     while (len(curr)<2500 and i<len(scenes)):
+    #         curr+=scenes[i]
+    #         i+=1
+    #     this_scene=f"PREVIOUSLY IN THE STORY: {prev_summary}\n\n CURRENT SCENE TEXT: {curr}"
+    # else:
+    curr=""
+    while (len(curr)<2500 and i<len(scenes)):
+        curr+=scenes[i]
+        i+=1
+    this_scene=curr
+
+    messages[1]={
+            "role": "user", 
+            "content": f'''Here is the script segment to summarize:\n{this_scene}\nWrite the narrative summary now.'''
+            }
+    outputs = pipe(
+        messages,
+        max_new_tokens=300,
+        do_sample=False,
+        temperature=None, 
+        top_p=None
+    )
+    # print(this_scene)
+    # print("-------------------------------------------------")
+    
+    prev_summary=outputs[0]["generated_text"][-1]["content"]
+    print(prev_summary)
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print()
+    summaries.append(prev_summary)
     

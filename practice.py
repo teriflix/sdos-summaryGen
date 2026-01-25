@@ -47,6 +47,6 @@ for j in inds:
 if (text[i:]):
     scenes.append(text[i:])
 
-print(scenes[0])
+print(len(scenes))
 # for m in match:
 #     print(m)
