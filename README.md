@@ -1,8 +1,8 @@
-# 🎬 Screenplay Analysis Tool
+#  Screenplay Analysis Tool
 
 A local-first, privacy-focused tool for analyzing screenplays using LLMs. This application ingests screenplays (in `.txt`, Fountain, or OSF format), parses them into scenes, and uses local AI models to generate detailed summaries, plot outlines, and character profiles.
 
-## ✨ Features
+##  Features
 
 -   **Scene-by-Scene Analysis**: Automatically breaks down scripts and summarizes each scene, identifying key actions, conflicts, and outcomes.
 -   **Story Plotting**: Synthesizes scene summaries into a cohesive high-level story synopsis, tracking the narrative arc.
@@ -12,17 +12,17 @@ A local-first, privacy-focused tool for analyzing screenplays using LLMs. This a
     -   **Web UI**: Interactive Streamlit dashboard for easy uploading and viewing of analysis.
     -   **CLI**: Command-line interface for batch processing or piping results.
 
-## 🛠️ Prerequisites
+##  Prerequisites
 
 -   **Python 3.8+**
 -   **[Ollama](https://ollama.com/)**: Must be installed and running locally.
 
-## 🚀 Installation
+##  Installation
 
 1.  **Clone the repository:**
     ```bash
     git clone <repository-url>
-    cd aiSLOP
+    cd <repository-url>
     ```
 
 2.  **Install Python dependencies:**
@@ -64,7 +64,7 @@ python main.py path/to/script.txt
 ```
 This will print the analysis to stdout and save detailed logs to the `log/` directory.
 
-## 📂 Project Structure
+##  Project Structure
 
 -   `app.py`: Streamlit web application.
 -   `main.py`: Core logic and CLI entry point.
