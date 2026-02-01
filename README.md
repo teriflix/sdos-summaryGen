@@ -1,76 +1,90 @@
-# 🎬 Screenplay Analysis Tool
+# AI-Powered Fountain Screenplay Summarizer
 
-A local-first, privacy-focused tool for analyzing screenplays using LLMs. This application ingests screenplays (in `.txt`, Fountain, or OSF format), parses them into scenes, and uses local AI models to generate detailed summaries, plot outlines, and character profiles.
+A high-performance C++ CLI tool that parses Fountain-formatted screenplays and uses local LLMs (via Ollama) to generate scene summaries, story synopses, and character profiles.
 
-## ✨ Features
+## Features
 
--   **Scene-by-Scene Analysis**: Automatically breaks down scripts and summarizes each scene, identifying key actions, conflicts, and outcomes.
--   **Story Plotting**: Synthesizes scene summaries into a cohesive high-level story synopsis, tracking the narrative arc.
--   **Character Profiling**: extracts deep psychological profiles for major characters, including traits, flaws, motivations, and relationships.
--   **Privacy-First**: Runs entirely locally using [Ollama](https://ollama.com/), ensuring your creative work never leaves your machine.
--   **Dual Interface**:
-    -   **Web UI**: Interactive Streamlit dashboard for easy uploading and viewing of analysis.
-    -   **CLI**: Command-line interface for batch processing or piping results.
+- **Protocol-Compliant Parsing**: Custom C++ implementation of the Fountain screenplay syntax.
+- **Local AI Integration**: Connects to [Ollama](https://ollama.com/) running locally.
+- **Configurable**: Support for `.env` file to configure model and API URL.
+- **Logging**: Automatically saves generated reports to the `log/` directory.
+- **Granular Analysis**:
+    - **Scene Summary**: Summarize individual scenes by header/location.
+    - **Story Summary**: Aggregate scene summaries into a cohesive plot synopsis.
+    - **Character Profiling**: Analyze dialogue and interactions to build psychological profiles.
 
-## 🛠️ Prerequisites
+## Prerequisites
 
--   **Python 3.8+**
--   **[Ollama](https://ollama.com/)**: Must be installed and running locally.
+- **C++ Compiler**: C++17 compliant (GCC, Clang, MSVC).
+- **CMake**: Version 3.10 or higher.
+- **libcurl**: Used for HTTP requests.
+- **Ollama**: Must be installed and running.
 
-## 🚀 Installation
+## Build Instructions
 
-1.  **Clone the repository:**
+1.  **Clone the repository**:
     ```bash
-    git clone <repository-url>
-    cd aiSLOP
+    git clone <repo_url>
+    cd <repo_name>
     ```
 
-2.  **Install Python dependencies:**
+2.  **Create a build directory**:
     ```bash
-    pip install -r requirements.txt
+    mkdir build
+    cd build
     ```
 
-3.  **Set up Ollama:**
-    Ensure Ollama is running (`ollama serve`). Then, pull the required models:
+3.  **Compile**:
     ```bash
-    ollama pull llama3.1:8b-instruct-q4_0
-    ollama pull nomic-embed-text:latest
-    ```
-    *Note: You can configure different models in the `.env` file.*
-
-4.  **Configuration (Optional):**
-    Create a `.env` file if you wish to override defaults:
-    ```env
-    OLLAMA_BASE_URL=http://127.0.0.1:11434
-    CHAT_MODEL=llama3.1:8b-instruct-q4_0
-    EMBED_MODEL=nomic-embed-text:latest
+    cmake ..
+    make
     ```
 
-## 📖 Usage
+## Configuration (.env)
 
-### Web Interface (Recommended)
+Create a `.env` file in the same directory as the executable to configure Ollama. A sample `.env` is created for you.
 
-Run the Streamlit app:
-```bash
-streamlit run app.py
+```ini
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+# Choose a model that fits your hardware (e.g., llama3.2:1b for low VRAM, llama3.1:8b for better quality)
+OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
 ```
-This will open a browser window where you can upload your screenplay file and view the interactive results.
 
-### Command Line Interface
+## Usage
 
-Process a script directly from the terminal:
+Ensure Ollama is running:
 ```bash
-python main.py path/to/script.txt
+ollama serve
 ```
-This will print the analysis to stdout and save detailed logs to the `log/` directory.
 
-## 📂 Project Structure
+### 1. Generate Full Story & Character Summary (Default)
+Parses the entire script, generates a story synopsis, and creates psychological profiles for the top 5 characters (detected by dialogue count).
+logs are saved to `log/`.
+```bash
+./fountain_tool path/to/script.fountain
+```
 
--   `app.py`: Streamlit web application.
--   `main.py`: Core logic and CLI entry point.
--   `ollama_client.py`: Handles communication with the local Ollama instance.
--   `parser.py`: Logic for parsing Fountain/text screenplays.
--   `summarizer.py`: Functions for generating specific types of summaries.
--   `sys_prompts.py`: System prompts used to guide the LLM's analysis.
--   `embeddings.py`: Handles vector embedding generation (for future RAG capabilities).
--   `log/`: Directory where analysis outputs are saved.
+### 2. Summarize a Specific Scene
+Finds a scene matching the provided header fragment.
+```bash
+./fountain_tool path/to/script.fountain --scene "INT. COFFEE SHOP"
+```
+
+### 3. Generate Character Profile
+```bash
+./fountain_tool path/to/script.fountain --character "MARK"
+```
+
+## Logs
+
+Generated summaries and profiles are automatically saved to the `log/` folder with timestamps, e.g.:
+- `log/script_20231027_123045_story_full.txt` (Contains story, character profiles, and scene breakdowns)
+- `log/script_20231027_123045_character_MARK.txt`
+
+## Dependencies
+
+- [nlohmann/json](https://github.com/nlohmann/json) (Included in `include/`)
+
+## License
+
+MIT
