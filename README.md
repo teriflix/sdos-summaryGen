@@ -73,9 +73,9 @@ Response:
 - **Model**: Default model can be configured in `.env` or passed per request.
 
 - Example .env
-```json
+```bash
 {
-  # .env file for Fountain Summarizer
+# .env file for Fountain Summarizer
 # Configure your Ollama instance here
 
 # Base URL for Ollama API
