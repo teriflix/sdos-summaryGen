@@ -74,7 +74,7 @@ Response:
 
 - Example .env
 ```bash
-{
+
 # .env file for Fountain Summarizer
 # Configure your Ollama instance here
 
@@ -87,7 +87,7 @@ OLLAMA_BASE_URL=http://127.0.0.1:11434
 # - llama3.2:3b (Faster, lower memory)
 # - mistral (Good alternative)
 OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
-}
+
 ```
 
 ## Project Structure
