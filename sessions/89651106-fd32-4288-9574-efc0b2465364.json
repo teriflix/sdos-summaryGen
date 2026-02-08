@@ -1,0 +1,254 @@
+{
+    "characters": {
+        "BRICK": {
+            "dialogueCount": 3,
+            "name": "BRICK",
+            "sceneIds": [
+                1,
+                5
+            ],
+            "summary": ""
+        },
+        "COGNITO": {
+            "dialogueCount": 3,
+            "name": "COGNITO",
+            "sceneIds": [
+                4
+            ],
+            "summary": ""
+        },
+        "DAN": {
+            "dialogueCount": 2,
+            "name": "DAN",
+            "sceneIds": [
+                2
+            ],
+            "summary": ""
+        },
+        "HANDSOME MAN": {
+            "dialogueCount": 1,
+            "name": "HANDSOME MAN",
+            "sceneIds": [
+                6
+            ],
+            "summary": ""
+        },
+        "JACK": {
+            "dialogueCount": 1,
+            "name": "JACK",
+            "sceneIds": [
+                2
+            ],
+            "summary": ""
+        },
+        "MINION": {
+            "dialogueCount": 1,
+            "name": "MINION",
+            "sceneIds": [
+                6
+            ],
+            "summary": ""
+        },
+        "STEEL": {
+            "dialogueCount": 11,
+            "name": "STEEL",
+            "sceneIds": [
+                1,
+                3,
+                4,
+                5
+            ],
+            "summary": ""
+        }
+    },
+    "config": {
+        "contextWindow": 8192,
+        "modelName": "llama3.1:8b-instruct-q4_0"
+    },
+    "createdAt": 1770568556,
+    "filepath": "/Users/aditya/Acad/sem6/sdos/aiSLOP/iter1(noRAG)(7b)(cpp)/BrickAndSteel.txt",
+    "id": "89651106-fd32-4288-9574-efc0b2465364",
+    "lastModified": 1770568556,
+    "scenes": [
+        {
+            "content": "Title:\n\t_**BRICK & STEEL**_\n\t_**FULL RETIRED**_\nCredit: Written by\nAuthor: Stu Maschwitz\nSource: Story by KTM\nDraft date: 1/27/2012\nContact:\n\tNext Level Productions\n\t1588 Mission Dr.\n\tSolvang, CA 93463",
+            "dialogues": [],
+            "endLine": 12,
+            "header": "START",
+            "id": 0,
+            "startLine": 1,
+            "summary": ""
+        },
+        {
+            "content": "A gorgeous day.  The sun is shining.  But BRICK BRADDOCK, retired police detective, is sitting quietly, contemplating -- something.\n\nThe SCREEN DOOR slides open and DICK STEEL, his former partner and fellow retiree, emerges with two cold beers.\n\nSTEEL\nBeer's ready!\n\nBRICK\nAre they cold?\n\nSTEEL\nDoes a bear crap in the woods?\n\nSteel sits.  They laugh at the dumb joke.\n\nSTEEL\n(beer raised)\nTo retirement.\n\nBRICK\nTo retirement.\n\nThey drink long and well from the beers.\n\nAnd then there's a long beat.\nLonger than is funny.\nLong enough to be depressing.\n\nThe men look at each other.\n\nSTEEL\nScrew retirement.\n\nBRICK ^\nScrew retirement.\n\nSMASH CUT TO:",
+            "dialogues": [
+                {
+                    "character": "STEEL",
+                    "lineNumber": 20,
+                    "text": "Beer's ready!"
+                },
+                {
+                    "character": "BRICK",
+                    "lineNumber": 23,
+                    "text": "Are they cold?"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 26,
+                    "text": "Does a bear crap in the woods?"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 32,
+                    "text": "To retirement."
+                },
+                {
+                    "character": "BRICK",
+                    "lineNumber": 35,
+                    "text": "To retirement."
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 46,
+                    "text": "Screw retirement."
+                }
+            ],
+            "endLine": 52,
+            "header": "EXT. BRICK'S PATIO - DAY",
+            "id": 1,
+            "startLine": 13,
+            "summary": "On Brick's patio on a gorgeous day, the sun shines brightly as retired detective Brick Braddock sits lost in thought. His former partner and fellow retiree, Dick Steel, emerges with two cold beers, breaking the silence with a lighthearted joke that briefly lifts the tension. As they laugh and toast to retirement, their camaraderie appears genuine, but a long, uncomfortable pause follows, hinting at deeper issues. The men exchange a weighted glance, and in a shocking reversal, Steel's words and Brick's mirror response shift from celebratory to defiant, abandoning their earlier enthusiasm for the idea of retirement, leaving an air of uncertainty and foreboding."
+        },
+        {
+            "content": "This is the home of THE BOY BAND, AKA DAN and JACK.  They too are drinking beer, and counting the take from their last smash-and-grab.  Money, drugs, and ridiculous props are strewn about the table.\n\n\t\t\tJACK\n\t\t(in Vietnamese, subtitled)\n\t*Did you know Brick and Steel are retired?*\n\n\t\t\tDAN\n\tThen let's retire them.\n\t_Permanently_.\n\nJack begins to argue vociferously in Vietnamese (?), But mercifully we...\n\n\t\t\t\tCUT TO:",
+            "dialogues": [
+                {
+                    "character": "JACK",
+                    "lineNumber": 59,
+                    "text": "*Did you know Brick and Steel are retired?*"
+                },
+                {
+                    "character": "DAN",
+                    "lineNumber": 62,
+                    "text": "Then let's retire them."
+                },
+                {
+                    "character": "DAN",
+                    "lineNumber": 63,
+                    "text": "_Permanently_."
+                }
+            ],
+            "endLine": 68,
+            "header": "INT. TRAILER HOME - DAY",
+            "id": 2,
+            "startLine": 53,
+            "summary": "As the Boy Band's trailer home fills with the smell of stale beer and discarded revelry, a tension-fueled conversation unfolds between Dan and Jack over the table littered with cash, contraband, and flashy trinkets. The mention of Brick and Steel's retirement sparks a heated debate, with Jack passionately arguing against the idea in his native Vietnamese, as subtitled dialogue reveals his fervent emotion. Dan's cool, calculating response - to \"retire\" their rivals permanently - ignites a conflict that hints at darker intentions beneath the surface of their hedonistic lifestyle, leaving the audience wondering where this conversation will ultimately lead."
+        },
+        {
+            "content": "Steel, in the middle of a heated phone call:\n\nSTEEL\nThey're coming out of the woodwork!\n(pause)\nNo, everybody we've put away!\n(pause)\nPoint Blank Sniper?\n\n.SNIPER SCOPE POV\n\nFrom what seems like only INCHES AWAY.  _Steel's face FILLS the *Leupold Mark 4* scope_.\n\nSTEEL\nThe man's a myth!\n\nSteel turns and looks straight into the cross-hairs.\n\nSTEEL\n(oh crap)\nHello...\n\nCUT TO:\n\n.OPENING TITLES\n\n> BRICK BRADDOCK <\n> & DICK STEEL IN <\n\n> BRICK & STEEL <\n> FULL RETIRED <\n\nSMASH CUT TO:",
+            "dialogues": [
+                {
+                    "character": "STEEL",
+                    "lineNumber": 74,
+                    "text": "They're coming out of the woodwork!"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 76,
+                    "text": "No, everybody we've put away!"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 78,
+                    "text": "Point Blank Sniper?"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 85,
+                    "text": "The man's a myth!"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 91,
+                    "text": "Hello..."
+                }
+            ],
+            "endLine": 104,
+            "header": "EXT. BRICK'S POOL - DAY",
+            "id": 3,
+            "startLine": 69,
+            "summary": ""
+        },
+        {
+            "content": "COGNITO, the criminal mastermind, is SLAMMED against the wall.\n\nCOGNITO\nWoah woah woah, Brick and Steel!\n\nSure enough, it's Brick and Steel, roughing up their favorite usual suspect.\n\nCOGNITO\nWhat is it you want with me, DICK?\n\nSteel SMACKS him.\n\nSTEEL\nWho's coming after us?\n\nCOGNITO\nEveryone's coming after you mate!  Scorpio, The Boy Band, Sparrow, Point Blank Sniper...\n\nAs he rattles off the long list, Brick and Steel share a look.  This is going to be BAD.\n\nCUT TO:",
+            "dialogues": [
+                {
+                    "character": "COGNITO",
+                    "lineNumber": 110,
+                    "text": "Woah woah woah, Brick and Steel!"
+                },
+                {
+                    "character": "COGNITO",
+                    "lineNumber": 115,
+                    "text": "What is it you want with me, DICK?"
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 120,
+                    "text": "Who's coming after us?"
+                },
+                {
+                    "character": "COGNITO",
+                    "lineNumber": 123,
+                    "text": "Everyone's coming after you mate!  Scorpio, The Boy Band, Sparrow, Point Blank Sniper..."
+                }
+            ],
+            "endLine": 128,
+            "header": "EXT. WOODEN SHACK - DAY",
+            "id": 4,
+            "startLine": 105,
+            "summary": ""
+        },
+        {
+            "content": "BRICK and STEEL get into Mom's PORSCHE, Steel at the wheel.  They pause for a beat, the gravity of the situation catching up with them.\n\nBRICK\nThis is everybody we've ever put away.\n\nSTEEL\n(starting the engine)\nSo much for retirement!\n\nThey speed off.  To destiny!\n\nCUT TO:",
+            "dialogues": [
+                {
+                    "character": "BRICK",
+                    "lineNumber": 134,
+                    "text": "This is everybody we've ever put away."
+                },
+                {
+                    "character": "STEEL",
+                    "lineNumber": 138,
+                    "text": "So much for retirement!"
+                }
+            ],
+            "endLine": 143,
+            "header": "INT. GARAGE - DAY",
+            "id": 5,
+            "startLine": 129,
+            "summary": ""
+        },
+        {
+            "content": "An EXTREMELY HANDSOME MAN drinks a beer.  Shirtless, unfortunately.\n\nHis minion approaches offscreen:\n\nMINION\nWe found Brick and Steel!\n\nHANDSOME MAN\nI want them dead.  DEAD!\n\nBeer flies.\n\n> BURN TO PINK.\n\n> THE END <",
+            "dialogues": [
+                {
+                    "character": "MINION",
+                    "lineNumber": 151,
+                    "text": "We found Brick and Steel!"
+                },
+                {
+                    "character": "HANDSOME MAN",
+                    "lineNumber": 154,
+                    "text": "I want them dead.  DEAD!"
+                }
+            ],
+            "endLine": 160,
+            "header": "EXT. PALATIAL MANSION - DAY",
+            "id": 6,
+            "startLine": 144,
+            "summary": ""
+        }
+    ],
+    "storySummary": "Retired detective Brick Braddock's idyllic retirement is disrupted by the revelation that his former partner and friend, Dick Steel, shares his growing disillusionment with the idea. As they initially celebrate their newfound freedom on a sun-kissed patio, their jests and camaraderie slowly give way to a tense, unspoken understanding that hints at deeper issues beneath the surface of their comfortable lives.\n\nThis newfound unease is mirrored in the Boy Band's trailer home, where Dan and Jack are caught up in a heated debate sparked by Brick and Steel's retirement news. Jack's passionate argument against retirement takes on a more sinister tone as he reveals his true intentions - to eliminate their rivals permanently - rather than simply enjoying their spoils of success. As Dan appears to be more calculating and detached, the tension between them builds, foreshadowing a darker future for these two hedonistic partners.\n\nThe convergence of Brick's internal conflict with Jack's external one sets in motion a chain of events that will lead to a dramatic confrontation between the retired detectives and the Boy Band. The seeds of discord sown on Brick's patio are destined to sprout into chaos, as both individuals are drawn into a world where loyalty is tested, and the lines between right and wrong become increasingly blurred. As the story unfolds, it becomes clear that retirement may not be an escape from the past, but rather a catalyst for new conflicts and unforeseen consequences."
+}

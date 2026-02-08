@@ -1,20 +1,88 @@
-# summaryGen
+# Fountain Analysis Daemon
 
-C++ library that can be used to generate scene, story and character summary from [Fountain](https://fountain.io) files.
+This project provides a backend daemon for analyzing Fountain screenplays. It parses Fountain files, manages sessions, and generates hierarchical summaries (scene, story, character) using the Ollama API.
 
-This library will eventually be used by the Scrite project to let users generate scene, story and character summaries while importing scripts into Scrite, and also on demand when triggered by user action within the UI.
+## Features
 
-A brief description of the screenplay format can be found here: https://jotterpad.app/how-to-format-a-screenplay/
+- **Fountain Parsing**: Extracts scenes, dialogues, and metadata from `.fountain` files.
+- **Session Management**: Persists analysis sessions to disk (`sessions/` directory), supporting resuming work across restarts.
+- **Hierarchical Summarization**:
+    - **Scene Summaries**: Generates summaries for individual scenes.
+    - **Story Summary**: Aggregates scene summaries into a cohesive story overview.
+    - **Character Profiles**: Analyzes character arcs based on dialogue and scene participation.
+- **Caching**: Avoids redundant LLM calls by caching generated summaries.
+- **REST API**: Exposes all functionality via a JSON-based HTTP API on port 8080.
+- **Customizable Prompts**: Supports overriding the default system prompts for tailored analysis.
 
-The fountain syntax is described here: https://fountain.io/syntax/
+## Prerequisites
 
-## Expectations
+- **C++ Compiler**: GCC or Clang with C++17 support.
+- **CMake**: Version 3.10 or higher.
+- **Ollama**: Running locally with the desired model (default: `llama3.1:8b-instruct-q4_0`).
+- **Dependencies**:
+    - `cpp-httplib` (included/header-only)
+    - `nlohmann/json` (included/header-only)
+    - `libcurl`
 
-### Must haves
-- The C++ library must offer a function to report story summary
-- It should offer a function to accept a scene index, and return scene summary for the same.
-- It should offer a function to accept a character name, and return a character summary
+## Building
 
-## Sample files
+1. Create a build directory:
+   ```bash
+   mkdir build
+   cd build
+   ```
 
-For now make use of the screenplay for "Big Fish" provied in here: https://fountain.io/_downloads/Big-Fish.fountain
+2. Configure and build:
+   ```bash
+   cmake ..
+   make
+   ```
+
+## Usage
+
+1. Start the daemon:
+   ```bash
+   ./fountain_tool
+   ```
+   The server listens on port `8080`.
+
+2. Interact via API (see `apiUsage.md` for full documentation).
+
+### Example: Start a Session
+
+```bash
+curl -X POST http://localhost:8080/session/start \
+     -H "Content-Type: application/json" \
+     -d '{
+           "filepath": "/abs/path/to/script.fountain",
+           "model_name": "llama3.1:8b-instruct-q4_0"
+         }'
+```
+
+Response:
+```json
+{
+  "session_id": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+## Configuration
+
+- **Port**: Set `PORT` environment variable (default: 8080).
+- **Ollama URL**: Set `OLLAMA_BASE_URL` (default: http://127.0.0.1:11434).
+- **Model**: Default model can be configured in `.env` or passed per request.
+
+## Project Structure
+
+- `src/`: Source code.
+  - `main.cpp`: Entry point and REST server.
+  - `SessionManager`: Handles session persistence and lifecycle.
+  - `FountainParser`: Parsing logic.
+  - `Summarizer`: LLM interaction logic.
+- `include/`: Header-only dependencies.
+- `sessions/`: JSON storage for active sessions.
+- `tests/`: specific testing scripts.
+
+## License
+
+[License Information Here]

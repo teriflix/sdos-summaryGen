@@ -1,0 +1,107 @@
+{
+    "characters": {
+        "MARK": {
+            "dialogueCount": 5,
+            "name": "MARK",
+            "sceneIds": [
+                1,
+                2
+            ],
+            "summary": ""
+        },
+        "RACHEL": {
+            "dialogueCount": 4,
+            "name": "RACHEL",
+            "sceneIds": [
+                1,
+                2
+            ],
+            "summary": ""
+        }
+    },
+    "config": {
+        "contextWindow": 8192,
+        "modelName": "llama3.1:8b-instruct-q4_0"
+    },
+    "createdAt": 1770569106,
+    "filepath": "/Users/aditya/Acad/sem6/sdos/aiSLOP/iter1(noRAG)(7b)(cpp)/test.fountain",
+    "id": "e6ccacb6-f4c2-4961-8be5-8a5a9eb0ec7f",
+    "lastModified": 1770569106,
+    "scenes": [
+        {
+            "content": "",
+            "dialogues": [],
+            "endLine": 1,
+            "header": "START",
+            "id": 0,
+            "startLine": 1,
+            "summary": ""
+        },
+        {
+            "content": "A cozy coffee shop. RACHEL (20s) sits at a table, nervously tapping her pen.\nMARK (30s) enters, looking dishevelled.\n\nMARK\nSorry I'm late. Traffic was a nightmare.\n\nRACHEL\nI thought you weren't coming.\n\nMark sits down. He sighs.\n\nMARK\nI almost didn't. But we need to talk about the project.\nIt's going to fail, Rachel.\n\nRACHEL\nDon't say that. We have the data.\n\nMARK\nThe data is wrong.",
+            "dialogues": [
+                {
+                    "character": "MARK",
+                    "lineNumber": 8,
+                    "text": "Sorry I'm late. Traffic was a nightmare."
+                },
+                {
+                    "character": "RACHEL",
+                    "lineNumber": 11,
+                    "text": "I thought you weren't coming."
+                },
+                {
+                    "character": "MARK",
+                    "lineNumber": 16,
+                    "text": "I almost didn't. But we need to talk about the project."
+                },
+                {
+                    "character": "MARK",
+                    "lineNumber": 17,
+                    "text": "It's going to fail, Rachel."
+                },
+                {
+                    "character": "RACHEL",
+                    "lineNumber": 20,
+                    "text": "Don't say that. We have the data."
+                },
+                {
+                    "character": "MARK",
+                    "lineNumber": 23,
+                    "text": "The data is wrong."
+                }
+            ],
+            "endLine": 24,
+            "header": "INT. COFFEE SHOP - DAY",
+            "id": 1,
+            "startLine": 2,
+            "summary": "As Rachel and Mark sit in a cozy coffee shop on a sunny day, their conversation takes a dark turn. Initially, Rachel seems anxious, her pen tapping out a nervous rhythm, but Mark's arrival brings a sense of tension to the space. His disheveled appearance only adds to the air of unease as he apologizes for his tardiness, which is quickly followed by an admission that he almost didn't show up at all. The stakes are raised as Mark reveals the harsh truth: the project they've been working on is doomed to fail, and the data Rachel has been clinging to is actually flawed. This bombshell sets off a conflict within Rachel, her initial defensiveness giving way to a growing sense of doubt, as she's forced to confront the possibility that everything she thought was true may not be so after all."
+        },
+        {
+            "content": "They walk side by side.\n\nRACHEL\nSo what do we do?\n\nMARK\nWe start over.\n\nRACHEL\nI can't start over. I have a deadline.",
+            "dialogues": [
+                {
+                    "character": "RACHEL",
+                    "lineNumber": 30,
+                    "text": "So what do we do?"
+                },
+                {
+                    "character": "MARK",
+                    "lineNumber": 33,
+                    "text": "We start over."
+                },
+                {
+                    "character": "RACHEL",
+                    "lineNumber": 36,
+                    "text": "I can't start over. I have a deadline."
+                }
+            ],
+            "endLine": 36,
+            "header": "EXT. PARK - LATER",
+            "id": 2,
+            "startLine": 25,
+            "summary": ""
+        }
+    ],
+    "storySummary": ""
+}
