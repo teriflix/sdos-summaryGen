@@ -72,6 +72,24 @@ Response:
 - **Ollama URL**: Set `OLLAMA_BASE_URL` (default: http://127.0.0.1:11434).
 - **Model**: Default model can be configured in `.env` or passed per request.
 
+- Example .env
+```json
+{
+  # .env file for Fountain Summarizer
+# Configure your Ollama instance here
+
+# Base URL for Ollama API
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+
+# Model to use
+# Examples: 
+# - llama3.1:8b-instruct-q4_0 (Balanced)
+# - llama3.2:3b (Faster, lower memory)
+# - mistral (Good alternative)
+OLLAMA_MODEL=llama3.1:8b-instruct-q4_0
+}
+```
+
 ## Project Structure
 
 - `src/`: Source code.
