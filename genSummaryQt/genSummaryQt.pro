@@ -1,6 +1,6 @@
 QT += gui network
 
-TARGET = genSceneSummaryQt
+TARGET = genSummaryQt
 DESTDIR = $$PWD
 
 macx {
