@@ -8,7 +8,7 @@
 #include <QJsonArray>
 
 QUrl OllamaClient::url = QUrl("http://localhost:11434/api/chat");
-QString OllamaClient::model = "llama3";
+QString OllamaClient::model = "llama3.2:3b";
 
 OllamaClient::OllamaClient(QObject *parent) : QObject(parent)
 {

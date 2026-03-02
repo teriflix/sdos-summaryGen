@@ -947,7 +947,7 @@ QString Fountain::Writer::toString() const
     QString ret;
 
     QTextStream ts(&ret, QIODevice::WriteOnly);
-    ts.setCodec("utf-8");
+    // ts.setCodecForLocale("utf-8");
     ts.setAutoDetectUnicode(true);
 
     for (const QPair<QString, QString> &item : m_titlePage) {
