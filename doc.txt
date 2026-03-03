@@ -1,0 +1,16 @@
+Architecture Design-> C++, LLama
+High Level Design->
+SRS 28/01/26
+MVP 14/02/26
+Reiteration 28/02/26
+Final Incorporating user inputs- 14/03/26
+
+MVP->
+We have already made Minimum viable product or MVP. It takes input as a fountain string parses it, and generates scene, character summaries. Integration with the Scrite application is the another aspect of MVP, that will specify the architectural constraints of the problem and see how the model responses show up in the app.
+
+Group Name- SummaryGen
+Team Members->
+Aditya Singh 2023050
+Manaswi Singh 2023307
+Utkarsh Garg 2023570
+Vidush Jindal 2023592
