@@ -1,10 +1,13 @@
 #ifndef STORYSUMMARIZER_H
 #define STORYSUMMARIZER_H
 
-class storysummarizer
+#include "abstracttask.h"
+
+class StorySummarizer: public AbstractTask
 {
 public:
-    storysummarizer();
+    StorySummarizer(const Fountain::Body &scene, int id);
+    bool run();
 };
 
 #endif // STORYSUMMARIZER_H

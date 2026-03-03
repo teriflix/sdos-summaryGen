@@ -1,0 +1,11 @@
+Output ONLY a JSON object following this exact schema:
+{
+  "character": "Name of the character.",
+  "goal": "What they want in this scene (one sentence).",
+  "motivation": "Why they want it (one sentence).",
+  "conflict": "The obstacle stopping them (one sentence).",
+  "epiphany": "What they realize or how they change (one sentence).",
+  "summary": "A high-level overview of their role (one sentence)."
+}
+
+Constraint: Each value MUST be exactly one sentence long. No more, no less.

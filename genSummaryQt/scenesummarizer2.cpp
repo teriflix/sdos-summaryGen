@@ -12,6 +12,8 @@ SceneSummarizer2::SceneSummarizer2(const Fountain::Body &scene, int id){
         m_prompt = file.readAll();
     else
         m_prompt = "Summarize this scene for me please.";
+
+    m_jsonFormat=0;
 }
 
 
@@ -68,7 +70,6 @@ bool SceneSummarizer2::run()
     } else {
         sceneText = Fountain::Writer(m_scene, Fountain::Writer::NoOption).toString();
     }
-
     OllamaClient *ollama = new OllamaClient(this);
     connect(ollama, &OllamaClient::response, this, &AbstractTask::onOllamaResponse);
     connect(ollama, &OllamaClient::error, this, &AbstractTask::onOllamaError);

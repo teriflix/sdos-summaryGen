@@ -2,16 +2,68 @@
 #include "charactersummarizer.h"
 #include "ollamaclient.h"
 
-CharacterSummarizer::CharacterSummarizer(const Fountain::Body &scene, int id){
+CharacterSummarizer::CharacterSummarizer(const Fountain::Body &scene, int id, QString charName){
     m_scene=scene;
     m_type=AbstractTask::Type::SceneSummary;
     m_id=id;
+    m_charName=charName;
+    QFile file(":/prompts/character.txt");
+    m_prompt=QString("Act as a script analyst. Analyze the provided script segment and summarize the character %1.").arg(charName);
 
-    QFile file(":/prompts/scene.txt");
     if (file.open(QFile::ReadOnly))
-        m_prompt = file.readAll();
-    else
-        m_prompt = "Summarize this scene for me please.";
+        m_prompt.append(file.readAll());
+
+    // 1. Create individual property objects
+    QJsonObject charProp;
+    charProp.insert("title", "Character");
+    charProp.insert("type", "string");
+
+    QJsonObject goalProp;
+    goalProp.insert("title", "Goal");
+    goalProp.insert("type", "string");
+
+    QJsonObject motivProp;
+    motivProp.insert("title", "Motivation");
+    motivProp.insert("type", "string");
+
+    QJsonObject conflictProp;
+    conflictProp.insert("title", "Conflict");
+    conflictProp.insert("type", "string");
+
+    QJsonObject epiphanyProp;
+    epiphanyProp.insert("title", "Epiphany");
+    epiphanyProp.insert("type", "string");
+
+    QJsonObject summaryProp;
+    summaryProp.insert("title", "Summary");
+    summaryProp.insert("type", "string");
+
+    // 2. Assemble the "properties" container
+    QJsonObject properties;
+    properties.insert("character", charProp);
+    properties.insert("goal", goalProp);
+    properties.insert("motivation", motivProp);
+    properties.insert("conflict", conflictProp);
+    properties.insert("epiphany", epiphanyProp);
+    properties.insert("summary", summaryProp);
+
+    // 3. Create the "required" array
+    QJsonArray required;
+    required.append("character");
+    required.append("goal");
+    required.append("motivation");
+    required.append("conflict");
+    required.append("epiphany");
+    required.append("summary");
+
+    // 4. Assemble the root object
+    QJsonObject* root= new QJsonObject;
+    root->insert("properties", properties);
+    root->insert("required", required);
+    root->insert("title", "CharacterSummary");
+    root->insert("type", "object");
+
+    m_jsonFormat=root;
 }
 
 
@@ -26,7 +78,7 @@ bool CharacterSummarizer::run()
 
     //sceneText contains the text to summarize
     QString sceneText;
-
+    // qDebug()<<"OK\n";
 
     //flag represents whether the given scene contains unwanted elements if so, they are not counted towards sceneText
     bool flag=false;
@@ -72,7 +124,7 @@ bool CharacterSummarizer::run()
     OllamaClient *ollama = new OllamaClient(this);
     connect(ollama, &OllamaClient::response, this, &AbstractTask::onOllamaResponse);
     connect(ollama, &OllamaClient::error, this, &AbstractTask::onOllamaError);
-    m_ollamaPromptId = ollama->request(m_prompt, sceneText);
+    m_ollamaPromptId = ollama->request(m_prompt, sceneText, m_jsonFormat);
 
     return m_ollamaPromptId >= 0;
 }

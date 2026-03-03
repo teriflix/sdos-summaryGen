@@ -12,13 +12,16 @@ void TaskQueue::run(){
     AbstractTask* task=m_queue.dequeue();
 
     connect(task, &AbstractTask::taskFinished, this, &TaskQueue::onTaskFinished);
-
+    qDebug()<<"Running task with id "<<task->getId();
+    Fountain::Body curr_scene=task->scene();
+    const QByteArray inputScene = Fountain::Writer(curr_scene, Fountain::Writer::NoOption).toByteArray();
+    // qDebug()<<"Scene: "<<inputScene.constData();
     task->run();
 
 }
 
 void TaskQueue::onTaskFinished(AbstractTask* task){
-    delete task;
+    // delete task;
     run();
 }
 

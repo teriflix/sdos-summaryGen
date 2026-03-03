@@ -4,9 +4,11 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
 
+#include "charactersummarizer.h"
 #include "ollamaclient.h"
 #include "scenesummarizer.h"
 #include "scenesummarizer2.h"
+#include "taskqueue.h"
 
 int main(int argc, char **argv)
 {
@@ -54,41 +56,46 @@ int main(int argc, char **argv)
     const QString characterArg= parser.value("character").toLower();
 
     Fountain::Body scene;
-    QMap<QString, Fountain::Body> characterDialogues;
-    QString prev="";
+    // QMap<QString, Fountain::Body> characterDialogues;
+    // QString prev="";
 
+    TaskQueue qu;
+    int ct=0;
     if (sceneNumberIsInt && sceneNumber > 0) {
         for (int i = 0; i < screenplay.size(); i++) {
             const Fountain::Element element = screenplay.at(i);
 
-            if (element.type == Fountain::Element::Character){
-                QString charName=element.text;
-                int j=0;
-                for (; j<charName.size(); j++){
-                    if (charName[j]=='(') break;
-                }
+            // if (element.type == Fountain::Element::Character){
+            //     QString charName=element.text;
+            //     int j=0;
+            //     for (; j<charName.size(); j++){
+            //         if (charName[j]=='(') break;
+            //     }
 
-                if (charName[j-1]==' ') j--;
+            //     if (charName[j-1]==' ') j--;
 
-                //maintaining a prev to which I will add character dialogues
-                prev=charName.mid(0,j).toLower();
-            }
-            else if (element.type== Fountain::Element::Dialogue && prev.size()){
-                // qDebug()<<prev<<"->"<<element.text;
-                characterDialogues[prev].append(element);
-            }
-            else{
-                prev="";
-            }
+            //     //maintaining a prev to which I will add character dialogues
+            //     prev=charName.mid(0,j).toLower();
+            // }
+            // else if (element.type== Fountain::Element::Dialogue && prev.size()){
+            //     // qDebug()<<prev<<"->"<<element.text;
+            //     characterDialogues[prev].append(element);
+            // }
+            // else{
+            //     prev="";
+            // }
 
             if (element.type == Fountain::Element::SceneHeading) {
-                --sceneNumber;
+                // --sceneNumber;
+                if (scene.size()){
+                    AbstractTask* task= new SceneSummarizer2(scene, ct++);
+                    qu.enqueue(task);
+                }
+                scene.clear();
             }
 
-            if (sceneNumber == 0 && element.type != Fountain::Element::Synopsis)
-                scene.append(element);
-            else if (sceneNumber < 0)
-                ;
+            if (element.type != Fountain::Element::Synopsis) scene.append(element);
+
         }
     }
     else {
@@ -101,10 +108,10 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    if (characterDialogues[characterArg].size()==0){
-        qWarning() << "The specified character was not found: " <<characterArg;
-        return -1;
-    }
+    // if (characterDialogues[characterArg].size()==0){
+    //     qWarning() << "The specified character was not found: " <<characterArg;
+    //     return -1;
+    // }
 
     const QString url = parser.value("url");
     if (!url.isEmpty()) {
@@ -121,8 +128,9 @@ int main(int argc, char **argv)
     }
     qDebug() << "Using model " << OllamaClient::model;
 
-    SceneSummarizer2 summarizer(scene,0);
-    SceneSummarizer summarizer2;
+    qu.run();
+    // SceneSummarizer2 summarizer(scene,0);
+    // CharacterSummarizer summarizer2(scene,1,characterArg);
 
     // const QString promptFile = parser.value("promptFile");
     // if (!promptFile.isEmpty()) {
@@ -140,83 +148,62 @@ int main(int argc, char **argv)
     //     qDebug() << key;
     // }
 
-    const QByteArray inputScene = Fountain::Writer(scene, Fountain::Writer::NoOption).toByteArray();
-    const QByteArray inputCharacterDialogues= Fountain::Writer(characterDialogues[characterArg], Fountain::Writer::NoOption).toByteArray();
-    qDebug("Scene Text: \n\n%s\n\n", inputScene.constData());
-    qDebug("Character Dialogues: \n\n%s\n\n", inputCharacterDialogues.constData());
+    // const QByteArray inputScene = Fountain::Writer(scene, Fountain::Writer::NoOption).toByteArray();
+    // const QByteArray inputCharacterDialogues= Fountain::Writer(characterDialogues[characterArg], Fountain::Writer::NoOption).toByteArray();
+    // qDebug("Scene Text: \n\n%s\n\n", inputScene.constData());
+    // qDebug("Character Dialogues: \n\n%s\n\n", inputCharacterDialogues.constData());
 
-    QObject::connect(&summarizer, &SceneSummarizer2::summary, [&scene](const QString &text) {
-        Fountain::Element summaryElement;
-        summaryElement.type = Fountain::Element::Synopsis;
-        summaryElement.text = text;
+    // QObject::connect(&summarizer, &SceneSummarizer2::summary, [&scene](const QString &text) {
 
-        auto it = std::find_if(scene.begin(), scene.end(), [](const Fountain::Element &element) {
-            return element.type == Fountain::Element::SceneHeading;
-        });
+    // });
 
-        if (it == scene.end())
-            scene.prepend(summaryElement);
-        else {
-            ++it;
-            scene.insert(it, summaryElement);
-        }
+    // QObject::connect(&summarizer, &SceneSummarizer2::error,
+    //                  [=](const QString &text) { qWarning() << "Error: " << text; });
+    // // QObject::connect(&summarizer, &SceneSummarizer::finished, &a, &QCoreApplication::quit);
 
-        const QByteArray sceneText =
-                Fountain::Writer(scene, Fountain::Writer::StrictSyntaxOption).toByteArray();
-        qDebug("Summary: %s\n", qPrintable(text));
+    // QObject::connect(&summarizer2, &SceneSummarizer::summary, [&scene](const QString &text) {
+    //     Fountain::Element summaryElement;
+    //     summaryElement.type = Fountain::Element::Synopsis;
+    //     summaryElement.text = text;
 
-        qApp->clipboard()->setText(sceneText);
-        qDebug("The sumarized scene is copied to clipboard.");
-    });
+    //     auto it = std::find_if(scene.begin(), scene.end(), [](const Fountain::Element &element) {
+    //         return element.type == Fountain::Element::SceneHeading;
+    //     });
 
-    QObject::connect(&summarizer, &SceneSummarizer2::error,
-                     [=](const QString &text) { qWarning() << "Error: " << text; });
-    // QObject::connect(&summarizer, &SceneSummarizer::finished, &a, &QCoreApplication::quit);
+    //     if (it == scene.end())
+    //         scene.prepend(summaryElement);
+    //     else {
+    //         ++it;
+    //         scene.insert(it, summaryElement);
+    //     }
 
-    QObject::connect(&summarizer2, &SceneSummarizer::summary, [&scene](const QString &text) {
-        Fountain::Element summaryElement;
-        summaryElement.type = Fountain::Element::Synopsis;
-        summaryElement.text = text;
+    //     const QByteArray sceneText =
+    //         Fountain::Writer(scene, Fountain::Writer::StrictSyntaxOption).toByteArray();
+    //     qDebug("Summary: %s\n", qPrintable(text));
 
-        auto it = std::find_if(scene.begin(), scene.end(), [](const Fountain::Element &element) {
-            return element.type == Fountain::Element::SceneHeading;
-        });
+    //     // qApp->clipboard()->setText(sceneText);
+    //     // qDebug("The sumarized scene is copied to clipboard.");
+    // });
 
-        if (it == scene.end())
-            scene.prepend(summaryElement);
-        else {
-            ++it;
-            scene.insert(it, summaryElement);
-        }
-
-        const QByteArray sceneText =
-            Fountain::Writer(scene, Fountain::Writer::StrictSyntaxOption).toByteArray();
-        qDebug("Summary: %s\n", qPrintable(text));
-
-        // qApp->clipboard()->setText(sceneText);
-        // qDebug("The sumarized scene is copied to clipboard.");
-    });
-
-    QObject::connect(&summarizer2, &SceneSummarizer::error,
-                     [=](const QString &text) { qWarning() << "Error: " << text; });
-    // QObject::connect(&summarizer2, &SceneSummarizer::finished, &a, &QCoreApplication::quit);
+    // QObject::connect(&summarizer2, &SceneSummarizer::error,
+    //                  [=](const QString &text) { qWarning() << "Error: " << text; });
+    // // QObject::connect(&summarizer2, &SceneSummarizer::finished, &a, &QCoreApplication::quit);
 
 
-    if (summarizer.run()) {
-        qDebug() << "Generating scene summary ...";
-    } else {
-        qWarning() << "Couldn't generate scene summary!";
-        return -1;
-    }
+    // if (summarizer.run()) {
+    //     qDebug() << "Generating scene summary ...";
+    // } else {
+    //     qWarning() << "Couldn't generate scene summary!";
+    //     return -1;
+    // }
 
-    QString prompt=QString("Write the character summary of %1 in one short paragraph.").arg(characterArg);
 
-    summarizer2.setPrompt(prompt);
-    if (summarizer2.summarize(characterDialogues[characterArg])) {
-        qDebug() << "Generating character summary ...";
-    } else {
-        qWarning() << "Couldn't generate character summary!";
-        return -1;
-    }
+    // // summarizer2.setPrompt(prompt);
+    // if (summarizer2.run()) {
+    //     qDebug() << "Generating character summary ...";
+    // } else {
+    //     qWarning() << "Couldn't generate character summary!";
+    //     return -1;
+    // }
     return a.exec();
 }

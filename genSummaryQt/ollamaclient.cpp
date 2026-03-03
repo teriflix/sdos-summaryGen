@@ -15,7 +15,7 @@ OllamaClient::OllamaClient(QObject *parent) : QObject(parent)
     m_nam = new QNetworkAccessManager(this);
 }
 
-int OllamaClient::request(const QString &systemMsg, const QString &userMsg)
+int OllamaClient::request(const QString &systemMsg, const QString &userMsg, QJsonObject* jsonFormat)
 {
     QNetworkRequest request(OllamaClient::url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -24,10 +24,13 @@ int OllamaClient::request(const QString &systemMsg, const QString &userMsg)
         return { { "role", role }, { "content", content } };
     };
 
-    const QJsonObject json(
+    QJsonObject json(
             { { "model", OllamaClient::model },
               { "stream", false },
               { "messages", QJsonArray({ msg("system", systemMsg), msg("user", userMsg) }) } });
+    if (jsonFormat!=0){
+        json["format"]=*jsonFormat;
+    }
     const QJsonDocument doc(json);
     const QByteArray data = doc.toJson();
     // qDebug("POST Data: %s\n\n", data.constData());

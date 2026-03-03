@@ -3,11 +3,15 @@
 
 #include "abstracttask.h"
 
-class CharacterSummarizer2: public AbstractTask
+class CharacterSummarizer: public AbstractTask
 {
 public:
-    CharacterSummarizer2(const Fountain::Body &scene, int id);
+    CharacterSummarizer(const Fountain::Body &scene, int id, QString char_name);
     bool run();
+
+private:
+    QString m_charName;
+
 };
 
 

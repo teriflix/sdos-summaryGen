@@ -7,11 +7,12 @@ StorySummarizer::StorySummarizer(const Fountain::Body &scene, int id){
     m_type=AbstractTask::Type::SceneSummary;
     m_id=id;
 
-    QFile file(":/prompts/scene.txt");
+    QFile file(":/prompts/story.txt");
     if (file.open(QFile::ReadOnly))
         m_prompt = file.readAll();
     else
-        m_prompt = "Summarize this scene for me please.";
+        m_prompt = "Summarize this story for me please.";
+    m_jsonFormat=0;
 }
 
 

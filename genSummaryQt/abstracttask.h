@@ -19,7 +19,7 @@ public:
     QString prompt() const { return m_prompt; }
     bool isBusy() const { return m_busy; }
     Fountain::Body scene() const { return m_scene; }
-
+    int getId() const {return m_id;}
     //setter methods
     void setPrompt(const QString &val);
     void setBusy(bool val);
@@ -57,6 +57,7 @@ protected:
     Fountain::Body m_scene;
     Type m_type;
     int m_id;
+    QJsonObject* m_jsonFormat= 0;
 };
 
 #endif // ABSTRACTTASK_H

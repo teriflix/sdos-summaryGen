@@ -17,7 +17,7 @@ public:
     static QUrl url;
     static QString model;
 
-    int request(const QString &systemMsg, const QString &userMsg);
+    int request(const QString &systemMsg, const QString &userMsg, QJsonObject* jsonFormat=0);
 
 signals:
     void response(int promptId, const QString &content, const QString &thoughts);

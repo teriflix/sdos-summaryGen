@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/prompts">
         <file>scene.txt</file>
+        <file>character.txt</file>
     </qresource>
 </RCC>

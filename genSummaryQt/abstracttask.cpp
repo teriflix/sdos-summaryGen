@@ -29,8 +29,12 @@ void AbstractTask::onOllamaError(int promptId, const QString &text)
 
     m_sceneSummary = QString();
     m_sceneSummaryError = text;
+
+    qWarning() << "Error: " << text;
+
     emit error(text, m_scene);
     emit finished();
+    emit taskFinished(this);
 
     ollama->deleteLater();
 
@@ -57,8 +61,30 @@ void AbstractTask::onOllamaResponse(int promptId, const QString &text)
     }
     file.close();
 
+    Fountain::Element summaryElement;
+    summaryElement.type = Fountain::Element::Synopsis;
+    summaryElement.text = text;
+
+    auto it = std::find_if(m_scene.begin(), m_scene.end(), [](const Fountain::Element &element) {
+        return element.type == Fountain::Element::SceneHeading;
+    });
+
+    if (it == m_scene.end())
+        m_scene.prepend(summaryElement);
+    else {
+        ++it;
+        m_scene.insert(it, summaryElement);
+    }
+
+    const QByteArray sceneText =
+        Fountain::Writer(m_scene, Fountain::Writer::StrictSyntaxOption).toByteArray();
+    // qDebug("Summary: %s\n", qPrintable(text));
+
+    // qApp->clipboard()->setText(sceneText);
+    // qDebug("The sumarized scene is copied to clipboard.");
     emit summary(text, m_scene);
     emit finished();
+    emit taskFinished(this);
 
     ollama->deleteLater();
     this->setBusy(false);
@@ -72,4 +98,5 @@ void AbstractTask::setBusy(bool val)
     m_busy = val;
     emit busyChanged();
 }
+
 
