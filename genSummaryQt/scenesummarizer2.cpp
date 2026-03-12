@@ -52,13 +52,14 @@ void SceneSummarizer2::onOllamaResponse(int promptId, const QString &text)
 
     toAdd.push_back('}');
 
-        if (file.open(QIODeviceBase::ReadWrite | QIODeviceBase::Append | QIODevice::Text)){
-           QTextStream out(&file);
-            out<<toAdd;
-        }
+    if (file.open(QIODeviceBase::ReadWrite | QIODeviceBase::Append | QIODevice::Text)){
+        QTextStream out(&file);
+        out<<toAdd;
+    }
 
-        file.close();
+    file.close();
 
+    //if you want json parsing strictly then this is the method
     //     const QJsonDocument doc2(json);
     //     const QByteArray data = doc2.toJson();
 
