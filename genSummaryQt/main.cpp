@@ -6,7 +6,6 @@
 
 #include "charactersummarizer.h"
 #include "ollamaclient.h"
-#include "scenesummarizer.h"
 #include "scenesummarizer2.h"
 #include "taskqueue.h"
 
@@ -128,10 +127,26 @@ int main(int argc, char **argv)
     }
     qDebug() << "Using model " << OllamaClient::model;
 
+    // QJsonDocument doc;
+    // QJsonParseError parseError;
+
+    // QFile file2("./out/sceneSummaries");
+
+    // file2.open(QIODevice::ReadOnly);
+    // QByteArray ba2 = file2.readAll();
+    // doc = QJsonDocument::fromJson(ba2, &parseError);
+    // if (parseError.error != QJsonParseError::NoError) {
+    //     qWarning() << "Parse error at" << parseError.offset << ":" << parseError.errorString();
+    // } else {
+    //     qDebug() << "parsed JSON";
+    //     qDebug() << doc.toJson(QJsonDocument::Compact);
+    // }
     qu.run();
+
+
     // SceneSummarizer2 summarizer(scene,0);
     // CharacterSummarizer summarizer2(scene,1,characterArg);
-
+    // summarizer2.run();
     // const QString promptFile = parser.value("promptFile");
     // if (!promptFile.isEmpty()) {
     //     QFile file(promptFile);

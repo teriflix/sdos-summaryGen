@@ -7,6 +7,7 @@ bool TaskQueue::enqueue(AbstractTask * task){
 
 void TaskQueue::run(){
     if (m_queue.empty()) {
+        qDebug()<<"The task queue has been finished.";
         return;
     }
     AbstractTask* task=m_queue.dequeue();
@@ -15,13 +16,13 @@ void TaskQueue::run(){
     qDebug()<<"Running task with id "<<task->getId();
     Fountain::Body curr_scene=task->scene();
     const QByteArray inputScene = Fountain::Writer(curr_scene, Fountain::Writer::NoOption).toByteArray();
-    // qDebug()<<"Scene: "<<inputScene.constData();
     task->run();
 
 }
 
 void TaskQueue::onTaskFinished(AbstractTask* task){
     // delete task;
+    task->deleteLater();
     run();
 }
 

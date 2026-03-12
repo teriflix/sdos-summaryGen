@@ -17,7 +17,6 @@ HEADERS += \
     charactersummarizer.h \
     fountain.h \
     ollamaclient.h \
-    scenesummarizer.h \
     scenesummarizer2.h \
     storysummarizer.h \
     taskqueue.h
@@ -28,7 +27,6 @@ SOURCES += \
     fountain.cpp \
     main.cpp \
     ollamaclient.cpp \
-    scenesummarizer.cpp \
     scenesummarizer2.cpp \
     storysummarizer.cpp \
     taskqueue.cpp

@@ -57,27 +57,23 @@ SOURCES       = ../../abstracttask.cpp \
 		../../fountain.cpp \
 		../../main.cpp \
 		../../ollamaclient.cpp \
-		../../scenesummarizer.cpp \
 		../../scenesummarizer2.cpp \
 		../../storysummarizer.cpp \
 		../../taskqueue.cpp qrc_prompts.cpp \
 		moc_abstracttask.cpp \
 		moc_ollamaclient.cpp \
-		moc_scenesummarizer.cpp \
 		moc_taskqueue.cpp
 OBJECTS       = abstracttask.o \
 		charactersummarizer.o \
 		fountain.o \
 		main.o \
 		ollamaclient.o \
-		scenesummarizer.o \
 		scenesummarizer2.o \
 		storysummarizer.o \
 		taskqueue.o \
 		qrc_prompts.o \
 		moc_abstracttask.o \
 		moc_ollamaclient.o \
-		moc_scenesummarizer.o \
 		moc_taskqueue.o
 DIST          = /Users/teo/Qt/6.10.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/teo/Qt/6.10.2/macos/mkspecs/features/device_config.prf \
@@ -327,7 +323,6 @@ DIST          = /Users/teo/Qt/6.10.2/macos/mkspecs/features/spec_pre.prf \
 		../../charactersummarizer.h \
 		../../fountain.h \
 		../../ollamaclient.h \
-		../../scenesummarizer.h \
 		../../scenesummarizer2.h \
 		../../storysummarizer.h \
 		../../taskqueue.h ../../abstracttask.cpp \
@@ -335,7 +330,6 @@ DIST          = /Users/teo/Qt/6.10.2/macos/mkspecs/features/spec_pre.prf \
 		../../fountain.cpp \
 		../../main.cpp \
 		../../ollamaclient.cpp \
-		../../scenesummarizer.cpp \
 		../../scenesummarizer2.cpp \
 		../../storysummarizer.cpp \
 		../../taskqueue.cpp
@@ -877,8 +871,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../prompts.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../abstracttask.h ../../charactersummarizer.h ../../fountain.h ../../ollamaclient.h ../../scenesummarizer.h ../../scenesummarizer2.h ../../storysummarizer.h ../../taskqueue.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../abstracttask.cpp ../../charactersummarizer.cpp ../../fountain.cpp ../../main.cpp ../../ollamaclient.cpp ../../scenesummarizer.cpp ../../scenesummarizer2.cpp ../../storysummarizer.cpp ../../taskqueue.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../abstracttask.h ../../charactersummarizer.h ../../fountain.h ../../ollamaclient.h ../../scenesummarizer2.h ../../storysummarizer.h ../../taskqueue.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../abstracttask.cpp ../../charactersummarizer.cpp ../../fountain.cpp ../../main.cpp ../../ollamaclient.cpp ../../scenesummarizer2.cpp ../../storysummarizer.cpp ../../taskqueue.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -914,9 +908,9 @@ qrc_prompts.cpp: ../../prompts.qrc \
 		../../character.txt
 	/Users/teo/Qt/6.10.2/macos/libexec/rcc -name prompts --no-zstd ../../prompts.qrc -o qrc_prompts.cpp
 
-compiler_moc_header_make_all: moc_abstracttask.cpp moc_ollamaclient.cpp moc_scenesummarizer.cpp moc_taskqueue.cpp
+compiler_moc_header_make_all: moc_abstracttask.cpp moc_ollamaclient.cpp moc_taskqueue.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_abstracttask.cpp moc_ollamaclient.cpp moc_scenesummarizer.cpp moc_taskqueue.cpp
+	-$(DEL_FILE) moc_abstracttask.cpp moc_ollamaclient.cpp moc_taskqueue.cpp
 moc_abstracttask.cpp: ../../abstracttask.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qobject.h \
@@ -945,27 +939,6 @@ moc_ollamaclient.cpp: ../../ollamaclient.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qurl.h \
 		/Users/teo/Qt/6.10.2/macos/libexec/moc
 	/Users/teo/Qt/6.10.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=201402L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=17 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/teo/Qt/6.10.2/macos/mkspecs/macx-clang -I/Users/teo/Desktop/sdos-summaryGen/genSummaryQt -I/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers -I/Users/teo/Qt/6.10.2/macos/lib/QtNetwork.framework/Headers -I/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/teo/Qt/6.10.2/macos/lib ../../ollamaclient.h -o moc_ollamaclient.cpp
-
-moc_scenesummarizer.cpp: ../../scenesummarizer.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../fountain.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QList \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qlist.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QPair \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qpair.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QString \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qstring.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qvector.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QJsonArray \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonarray.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonobject.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/QTextLayout \
-		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/qtextlayout.h \
-		/Users/teo/Qt/6.10.2/macos/libexec/moc
-	/Users/teo/Qt/6.10.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=201402L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=17 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/teo/Qt/6.10.2/macos/mkspecs/macx-clang -I/Users/teo/Desktop/sdos-summaryGen/genSummaryQt -I/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers -I/Users/teo/Qt/6.10.2/macos/lib/QtNetwork.framework/Headers -I/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/teo/Qt/6.10.2/macos/lib ../../scenesummarizer.h -o moc_scenesummarizer.cpp
 
 moc_taskqueue.cpp: ../../taskqueue.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QObject \
@@ -1097,12 +1070,10 @@ main.o: ../../main.cpp /Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/Q
 		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/qguiapplication.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QCommandLineParser \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qcommandlineparser.h \
-		../../ollamaclient.h \
+		../../charactersummarizer.h \
+		../../abstracttask.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QUrl \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qurl.h \
-		../../scenesummarizer.h \
 		../../fountain.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QList \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qlist.h \
@@ -1118,8 +1089,13 @@ main.o: ../../main.cpp /Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/Q
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonobject.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/QTextLayout \
 		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/qtextlayout.h \
+		../../ollamaclient.h \
+		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QUrl \
+		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qurl.h \
 		../../scenesummarizer2.h \
-		../../abstracttask.h
+		../../taskqueue.h \
+		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QQueue \
+		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qqueue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 ollamaclient.o: ../../ollamaclient.cpp ../../ollamaclient.h \
@@ -1140,31 +1116,6 @@ ollamaclient.o: ../../ollamaclient.cpp ../../ollamaclient.h \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QJsonArray \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonarray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ollamaclient.o ../../ollamaclient.cpp
-
-scenesummarizer.o: ../../scenesummarizer.cpp ../../scenesummarizer.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../fountain.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QList \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qlist.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QPair \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qpair.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QString \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qstring.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qvector.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QJsonArray \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonarray.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QJsonObject \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qjsonobject.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/QTextLayout \
-		/Users/teo/Qt/6.10.2/macos/lib/QtGui.framework/Headers/qtextlayout.h \
-		../../ollamaclient.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QUrl \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qurl.h \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QFile \
-		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qfile.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scenesummarizer.o ../../scenesummarizer.cpp
 
 scenesummarizer2.o: ../../scenesummarizer2.cpp /Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/QFile \
 		/Users/teo/Qt/6.10.2/macos/lib/QtCore.framework/Headers/qfile.h \
@@ -1249,9 +1200,6 @@ moc_abstracttask.o: moc_abstracttask.cpp
 
 moc_ollamaclient.o: moc_ollamaclient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ollamaclient.o moc_ollamaclient.cpp
-
-moc_scenesummarizer.o: moc_scenesummarizer.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_scenesummarizer.o moc_scenesummarizer.cpp
 
 moc_taskqueue.o: moc_taskqueue.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskqueue.o moc_taskqueue.cpp

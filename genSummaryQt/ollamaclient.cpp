@@ -31,6 +31,7 @@ int OllamaClient::request(const QString &systemMsg, const QString &userMsg, QJso
     if (jsonFormat!=0){
         json["format"]=*jsonFormat;
     }
+
     const QJsonDocument doc(json);
     const QByteArray data = doc.toJson();
     // qDebug("POST Data: %s\n\n", data.constData());

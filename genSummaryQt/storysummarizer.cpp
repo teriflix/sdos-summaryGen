@@ -30,34 +30,13 @@ bool StorySummarizer::run()
 
 
     //flag represents whether the given scene contains unwanted elements if so, they are not counted towards sceneText
-    bool flag=false;
-    for (auto it=m_scene.begin(); it!= m_scene.end(); it++){
-        switch(it->type){
-        case Fountain::Element::None:{
-            flag=true;
-        }break;
-        case Fountain::Element::Unknown:{
-            flag=true;
-        }break;
-        case Fountain::Element::PageBreak:{
-            flag=true;
-        }break;
-        case Fountain::Element::LineBreak:{
-            flag=true;
-        }break;
-        case Fountain::Element::Section:{
-            flag=true;
-        }break;
-        case Fountain::Element::Synopsis:{
-            flag=true;
-        }break;
-        default:{
+    auto it = std::find_if(m_scene.begin(), m_scene.end(), [](const Fountain::Element &element) {
+        return !(element.type >= Fountain::Element::SceneHeading
+                 && element.type <= Fountain::Element::Transition);
+    });
 
-        }
-        }
-    }
 
-    if (flag) {
+    if (it!=m_scene.end()) {
         Fountain::Body sceneCopy;
         std::copy_if(m_scene.begin(), m_scene.end(), std::back_inserter(sceneCopy),
                      [=](const Fountain::Element &element) {

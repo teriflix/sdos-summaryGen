@@ -46,7 +46,7 @@ signals:
 
 public slots:
     void onOllamaError(int promptId, const QString &text);
-    void onOllamaResponse(int promptId, const QString &text);
+    virtual void onOllamaResponse(int promptId, const QString &text) =0;
 
 protected:
     int m_ollamaPromptId = -1;
