@@ -27,7 +27,8 @@ void SceneSummarizer2::onOllamaResponse(int promptId, const QString &text)
     m_sceneSummary = text;
     m_sceneSummaryError = QString();
 
-    QString fileName="./out/sceneSummaries.txt";
+
+    QString fileName="./out/sceneSummaries3.txt";
 
     QFile file(fileName);
 
@@ -37,24 +38,26 @@ void SceneSummarizer2::onOllamaResponse(int promptId, const QString &text)
         toAdd.push_back('{');
     }
     else{
-        file.resize(file.size()-1);
+        file.resize(file.size()-2);
         toAdd.push_back(',');
         toAdd.push_back('\n');
     }
-    toAdd.push_back('"');
-    for (char c:std::to_string(m_id)) toAdd.push_back(c);
-    toAdd.push_back('"');
-    toAdd.push_back(':');
-    toAdd.push_back(' ');
-    toAdd.push_back('"');
-    for (QChar c:m_sceneSummary) toAdd.push_back(c);
-    toAdd.push_back('"');
 
-    toAdd.push_back('}');
+
+
+    // QJsonDocument som= QJsonDocument::fromJson(("["+m_sceneSummary+"]").toUtf8(),&error);
+
+    // qDebug()<<error.errorString();
+    QJsonObject obj;
+    obj.insert(QString::number(m_id),m_sceneSummary);
+    const QJsonDocument doc(obj);
+    QByteArray data=doc.toJson();
+    data.remove(0,1);
 
     if (file.open(QIODeviceBase::ReadWrite | QIODeviceBase::Append | QIODevice::Text)){
         QTextStream out(&file);
-        out<<toAdd;
+        out<<toAdd.toUtf8();
+        out<<data;
     }
 
     file.close();
